@@ -1,5 +1,4 @@
 import wandb
-
 import numpy as np
 import os
 import sklearn
@@ -17,13 +16,14 @@ from torch.utils.data import random_split
 from copy import deepcopy
 from sklearn.metrics import r2_score
 
-wandb.login(key = "06bbc7b82c1b53168038e3c0848ab92df1fd2b04") # paste your key here
+wandb.login(key = "") # append your wandb api key here
+task = "heat" # SPECIFY TASK AS heat OR iod
 
 sweep_config = {
 'method': 'random'
     }
 
-with open("/config.yaml", "r") as config_file:
+with open("config.yaml", "r") as config_file:
     yaml_config = yaml.safe_load(config_file)
 
 sweep_config["parameters"] = yaml_config["parameters"]
@@ -34,8 +34,6 @@ np.random.seed(29)
 SCALER_HEAT = None
 SCALER_IOD = None
 SCALERS = {}
-
-task = "heat" # SPECIFY TASK AS heat OR iod
 
 def set_scalers():
 
@@ -48,13 +46,11 @@ def set_scalers():
     df_80 = "../datasets/2080_dataset.csv" # path to 2080_dataset.csv
     df_80 = pd.read_csv(df_80, delimiter=",")
 
-    combined = pd.concat([a, b, c])
+    combined = pd.concat([df_20, df_50, df_80])
 
     combined.drop('Year', inplace=True, axis=1)
     combined.drop('Version', inplace=True, axis=1)
     combined.drop('unit_id', inplace=True, axis=1)
-
-    display(combined.describe())
 
     global SCALERS
     global SCALER_HEAT
@@ -97,13 +93,14 @@ def data_prep(df, task="heat"):
 
     df = pd.concat([df, x], axis=1)
 
-
-    x = df.iloc[:,5:]
-
     if task == "heat":
-        y = df.iloc[:,[3]]
+        y = df.iloc[:,[0]]
+        df.drop("Annual Sum Cooling Degree Days", inplace= True, axis=1)
     elif task == "iod":
-        y = df.iloc[:,[4]]
+        y = df.iloc[:,[1]]
+        df.drop("Annual Sum Heating Degree Days", inplace= True, axis=1)
+
+    x = df.iloc[:,2:]
 
     return (x,y)
 
@@ -120,6 +117,18 @@ class dataset_gen(Dataset):
         df_80 = "../datasets/2080_dataset.csv" # path to 2080_dataset.csv
         df_80 = pd.read_csv(df_80, delimiter=",")
 
+        df_20.drop('Year', inplace=True, axis=1)
+        df_20.drop('Version', inplace=True, axis=1)
+        df_20.drop('unit_id', inplace=True, axis=1)
+
+        df_50.drop('Year', inplace=True, axis=1)
+        df_50.drop('Version', inplace=True, axis=1)
+        df_50.drop('unit_id', inplace=True, axis=1)
+
+        df_80.drop('Year', inplace=True, axis=1)
+        df_80.drop('Version', inplace=True, axis=1)
+        df_80.drop('unit_id', inplace=True, axis=1)
+
         if date == 2020:
             combined = df_20
         elif date == 2050:
@@ -134,7 +143,7 @@ class dataset_gen(Dataset):
         self.data = combined
 
         self.data = self.data.dropna(axis = "rows", how = "any")
-        (self.x, self.y) = data_prep(self.data, task = task, drop=drop)
+        (self.x, self.y) = data_prep(self.data, task = task)
 
     def __len__(self):
 
@@ -571,6 +580,6 @@ def train(config=None ,n_epochs = 100,early_stop = True, delta = 0.00002, patien
 
     return [net, loss_func]
 
-    sweep_id = wandb.sweep(sweep_config, project="lokal deneme", entity="sevval") # specify entity and project name
+sweep_id = wandb.sweep(sweep_config, project="", entity="") # specify entity and project name
 
-    wandb.agent(sweep_id, train, count=10)
+wandb.agent(sweep_id, train, count=10)
