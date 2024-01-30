@@ -1,0 +1,19 @@
+# config.yaml
+
+method: random
+
+parameters:
+        learning_rate:
+                distribution: uniform
+                min: 0.000001
+                max: 0.01
+
+        batch_size:
+                values: [32, 64, 128, 256]       
+        
+        layer_num:
+                values: [3, 4, 5, 6]
+        
+        layer_size:
+                values: [16, 32, 48, 64]
+
