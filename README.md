@@ -6,11 +6,11 @@ Ilkim Canli, Eren Gökberk Halacli, Sevval Ucar, Orcun Koral Iseri, Feyza Yavuz,
 "Machine learning based prediction of long-term energy consumption and overheating under climate change impacts using urban building energy modeling",
 under review, 2024.
 
-# A Brief Overview of The Paper
+## A Brief Overview of The Paper
 
 In our paper, we propose an ML-based, UBEM-assisted approach to make precise heating energy use and indoor overheating predictions for years 2020, 2050 and 2080. We trained multi-layer perceptrons (MLPs) using all three year's data and obtained 0.98 and 0.96 R^2 scores for heating energy use and indoor overheating respectively.
 
-# Dependencies
+## Dependencies
 - WandB
 - numpy
 - python3
@@ -20,7 +20,7 @@ In our paper, we propose an ML-based, UBEM-assisted approach to make precise hea
 - sklearn
 - yaml
 
-# Using codes.py
+## Using codes.py
 
 - Append your WandB api key to 
 ```
@@ -41,7 +41,7 @@ if (task=="heat"):
 ```
 at the end of codes.py
 
-# Heating End Use Experimental Setup
+## Heating End Use Experimental Setup
 
 Our results indicated on paper are obtained with the following configurations:
 
@@ -49,7 +49,7 @@ Our results indicated on paper are obtained with the following configurations:
 | --- | --- | --- | --- |
 | 32 | 6 | 48 | 0.0004869 |
 
-# Indoor Overheating Experimental Setup
+## Indoor Overheating Experimental Setup
 
 Our results indicated on paper are obtained with the following configurations:
 
