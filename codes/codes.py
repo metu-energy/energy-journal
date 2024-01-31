@@ -572,11 +572,10 @@ def train(config=None ,n_epochs = 100,early_stop = True, delta = 0.00002, patien
 
     wandb.finish()
 
-    if(R2_test_20*R2_test_50*R2_test_80 > 0 ):
-        if (task=="heat"):
-          torch.save(net.state_dict(),f"") # specify path to save your heat model
-        elif (task=="iod"):
-          torch.save(net.state_dict(),f"") # specify path to save your heat model
+    if (task=="heat"):
+        torch.save(net.state_dict(),f"") # specify path to save your heat model
+    elif (task=="iod"):
+        torch.save(net.state_dict(),f"") # specify path to save your iod model
 
     return [net, loss_func]
 
