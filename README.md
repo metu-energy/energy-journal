@@ -29,8 +29,8 @@ wandb.login(key = "")
 in codes.py
 
 - Specify the desired task:
-- - If you want to predict heating end use: "heat"
-- - If you want to predict indoor overheating: "iod"
+    - If you want to predict heating end use: "heat"
+    - If you want to predict indoor overheating: "iod"
 
 - Specify the path you want to save your trained model in 
 ```
