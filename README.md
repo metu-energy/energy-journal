@@ -41,4 +41,20 @@ if (task=="heat"):
 ```
 at the end of codes.py
 
+# Heating End Use Experimental Setup
+
+Our results indicated on paper are obtained with the following configurations:
+
+| batch_size |layer_num | layer_size | learning_rate |
+| --- | --- | --- | --- |
+| 32 | 6 | 48 | 0.0004869 |
+
+# Indoor Overheating Experimental Setup
+
+Our results indicated on paper are obtained with the following configurations:
+
+| batch_size |layer_num | layer_size | learning_rate |
+| --- | --- | --- | --- |
+| 64 | 5 | 64 | 0.003542 |
+
 # Full Readme is Being Prepared
