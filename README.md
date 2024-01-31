@@ -37,7 +37,7 @@ in codes.py
 if (task=="heat"):
         torch.save(net.state_dict(),f"") # specify path to save your heat model
     elif (task=="iod"):
-        torch.save(net.state_dict(),f"") # specify path to save your heat model
+        torch.save(net.state_dict(),f"") # specify path to save your iod model
 ```
 at the end of codes.py
 
