@@ -35,7 +35,6 @@ Follow these steps to set up and install the project:
     ```bash
     pip install -r requirements.txt
     ```
-    ```
 
 3. Fill the blanks in `config.ini` in codes directory.
 
