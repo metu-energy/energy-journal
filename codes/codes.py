@@ -21,7 +21,7 @@ def read_config_file(file_path='config.ini'):
     config = configparser.ConfigParser()
     config.read(file_path)
     
-    api_key = config['USER_INFO']['api_key']
+    api_key = config['USER_INFO']['wandb_api_key']
     task = config['USER_INFO']['task']
     path_and_name_to_model = config['USER_INFO']['path_and_name_to_model']
     project_name = config['USER_INFO']['project_name']
