@@ -8,6 +8,7 @@ import torch
 import sklearn.preprocessing as preprocessing
 import numpy as np
 import yaml
+import configparser
 
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
@@ -16,8 +17,22 @@ from torch.utils.data import random_split
 from copy import deepcopy
 from sklearn.metrics import r2_score
 
-wandb.login(key = "") # append your wandb api key here
-task = "heat" # SPECIFY TASK AS heat OR iod
+def read_config_file(file_path='config.ini'):
+    config = configparser.ConfigParser()
+    config.read(file_path)
+    
+    api_key = config['USER_INFO']['api_key']
+    task = config['USER_INFO']['task']
+    path_and_name_to_model = config['USER_INFO']['path_and_name_to_model']
+    project_name = config['USER_INFO']['project_name']
+    wandb_entity = config['USER_INFO']['wandb_entity']
+    number_of_experiments_to_run = config['USER_INFO']['number_of_experiments_to_run']
+    
+    return api_key, task, path_and_name_to_model, project_name, wandb_entity, number_of_experiments_to_run
+
+api_key, task, path_and_name_to_model, project_name, wandb_entity, number_of_experiments_to_run = read_config_file()
+
+wandb.login(key = api_key)
 
 sweep_config = {
 'method': 'random'
@@ -572,13 +587,10 @@ def train(config=None ,n_epochs = 100,early_stop = True, delta = 0.00002, patien
 
     wandb.finish()
 
-    if (task=="heat"):
-        torch.save(net.state_dict(),f"") # specify path to save your heat model
-    elif (task=="iod"):
-        torch.save(net.state_dict(),f"") # specify path to save your iod model
+    torch.save(net.state_dict(), path_and_name_to_model)
 
     return [net, loss_func]
 
-sweep_id = wandb.sweep(sweep_config, project="", entity="") # specify entity and project name
+sweep_id = wandb.sweep(sweep_config, project=project_name, entity=wandb_entity)
 
-wandb.agent(sweep_id, train, count=10)
+wandb.agent(sweep_id, train, count=int(number_of_experiments_to_run))
