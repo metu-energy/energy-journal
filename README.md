@@ -30,20 +30,16 @@ Follow these steps to set up and install the project:
     git clone https://github.com/your-username/your-project.git
     ```
 
-2. Install the dependencies using `pip` and the provided `requirements.txt` file:
+2. Install the dependencies using `pip` and the provided `requirements.txt` file in energy-journal directory:
 
     ```bash
     pip install -r requirements.txt
     ```
-
-3. Navigate to the project directory:
-
-    ```bash
-    cd codes
     ```
-4. Fill the blanks in `config.ini`
 
-5. Run the project:
+3. Fill the blanks in `config.ini` in codes directory.
+
+4. Run the project in codes directory:
 
     ```bash
     python3 codes.py
