@@ -305,7 +305,7 @@ def train(config=None ,n_epochs = 100,early_stop = True, delta = 0.00002, patien
     loss_epoch = []
     patience_count = 0
 
-    for epoch in range(1):
+    for epoch in range(30):
 
         running_loss = 0.0
         for i, (inputs, labels) in enumerate(trainloader):
