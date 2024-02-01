@@ -20,26 +20,35 @@ In our paper, we propose an ML-based, UBEM-assisted approach to make precise hea
 - sklearn
 - yaml
 
-## Using codes.py
+## Installation and Use
 
-- Append your WandB api key to 
-```
-wandb.login(key = "")
-```
-in codes.py
+Follow these steps to set up and install the project:
 
-- Specify the desired task:
-    - If you want to predict heating end use: "heat"
-    - If you want to predict indoor overheating: "iod"
+1. Clone the repository:
 
-- Specify the path you want to save your trained model in 
-```
-if (task=="heat"):
-        torch.save(net.state_dict(),f"") # specify path to save your heat model
-    elif (task=="iod"):
-        torch.save(net.state_dict(),f"") # specify path to save your iod model
-```
-at the end of codes.py
+    ```bash
+    git clone https://github.com/your-username/your-project.git
+    ```
+
+2. Install the dependencies using `pip` and the provided `requirements.txt` file:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Navigate to the project directory:
+
+    ```bash
+    cd codes
+    ```
+4. Fill the blanks in `config.ini`
+
+5. Run the project:
+
+    ```bash
+    python3 codes.py
+    ```
+
 
 ## Experimental Setups
 
