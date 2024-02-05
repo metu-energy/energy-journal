@@ -50,7 +50,7 @@ Follow these steps to set up and install the project:
    * __entity__ : This is the name of a team or a username when you are creating a new run with WandB.
    * __number_of_experiments_to_run__ : Number of experiments to run with WandB.
 
-4. (Optional) You can change the intervals for hyperparameters in /codes/config.ini.
+4. (Optional) Specify new intervals for hyperparameters in /codes/config.ini.
 
 5. Run the project in codes directory:
 
