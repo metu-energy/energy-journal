@@ -9,6 +9,7 @@ import sklearn.preprocessing as preprocessing
 import numpy as np
 import yaml
 import configparser
+import random
 
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
@@ -45,6 +46,7 @@ sweep_config["parameters"] = yaml_config["parameters"]
 
 torch.manual_seed(29)
 np.random.seed(29)
+random.seed(29)
 
 SCALER_HEAT = None
 SCALER_IOD = None
@@ -186,7 +188,7 @@ class Model(torch.nn.Module):
 
         self.out1 = torch.nn.Linear(layer_size, 1)
 
-        self.relu = torch.nn.LeakyReLU()
+        self.relu = torch.nn.ReLU()
         self.sigmoid = torch.nn.Sigmoid()
 
     def forward(self, x):
